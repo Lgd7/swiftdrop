@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SwiftDrop - Menu</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header" id="restaurant-name">Menu</div>
+    <!-- Cart link shows current number of items -->
+    <div style="margin-bottom: 20px;">
+      <a href="cart.html" class="button" style="float: right;">Cart (<span id="cart-count">0</span>)</a>
+    </div>
+    <div id="menu-grid" class="grid"></div>
+
+    <script src="data.js"></script>
+    <script>
+      // Parse merchant id from query string
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get('id');
+
+      // Find the selected merchant to display its name
+      const merchant = merchants.find((m) => m.id === id);
+      if (merchant) {
+        document.getElementById('restaurant-name').textContent = merchant.name;
+      }
+
+      // Render menu items for this merchant
+      const menuGrid = document.getElementById('menu-grid');
+      const items = menus[id] || [];
+      items.forEach((item) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div class="card-content">
+            <h2>${item.name}</h2>
+            <p>Price: ${item.price} MAD</p>
+            <button class="button" onclick="addToCart('${id}','${item.id}')">Add to Cart</button>
+          </div>
+        `;
+        menuGrid.appendChild(card);
+      });
+
+      // Function to add an item to the cart
+      function addToCart(merchantId, itemId) {
+        // Find the full item info
+        const itemList = menus[merchantId] || [];
+        const item = itemList.find((it) => it.id === itemId);
+        if (!item) return;
+        // Add merchantId to the item object for reference
+        const newItem = { ...item, merchantId };
+        let cart = [];
+        try {
+          cart = JSON.parse(localStorage.getItem('cart')) || [];
+        } catch (e) {
+          cart = [];
+        }
+        cart.push(newItem);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        alert(`${item.name} added to cart`);
+      }
+
+      // Update the cart item count displayed next to the cart link
+      function updateCartCount() {
+        let cart = [];
+        try {
+          cart = JSON.parse(localStorage.getItem('cart')) || [];
+        } catch (e) {
+          cart = [];
+        }
+        document.getElementById('cart-count').textContent = cart.length;
+      }
+
+      // Initialize cart count on page load
+      updateCartCount();
+    </script>
+  </body>
+</html>
