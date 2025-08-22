@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>SwiftDrop - Cart</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header">Your Cart</div>
+    <div id="cart-grid"></div>
+    <p class="cart-summary">Total: <span id="total">0</span> MAD</p>
+    <button class="button" onclick="placeOrder()">Place Order</button>
+
+    <script src="data.js"></script>
+    <script>
+      // Render the items currently in the cart
+      function renderCart() {
+        let cart = [];
+        try {
+          cart = JSON.parse(localStorage.getItem('cart')) || [];
+        } catch (e) {
+          cart = [];
+        }
+        const grid = document.getElementById('cart-grid');
+        grid.innerHTML = '';
+        let total = 0;
+        cart.forEach((item, index) => {
+          total += item.price;
+          const div = document.createElement('div');
+          div.className = 'cart-item';
+          div.innerHTML = `
+            <div>
+              <h3>${item.name}</h3>
+              <p>Price: ${item.price} MAD</p>
+            </div>
+            <button class="button" onclick="removeItem(${index})">Remove</button>
+          `;
+          grid.appendChild(div);
+        });
+        document.getElementById('total').textContent = total;
+      }
+
+      // Remove an item from the cart by index
+      function removeItem(i) {
+        let cart = [];
+        try {
+          cart = JSON.parse(localStorage.getItem('cart')) || [];
+        } catch (e) {
+          cart = [];
+        }
+        cart.splice(i, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        renderCart();
+      }
+
+      // Simulate placing an order by clearing the cart
+      function placeOrder() {
+        let cart = [];
+        try {
+          cart = JSON.parse(localStorage.getItem('cart')) || [];
+        } catch (e) {
+          cart = [];
+        }
+        if (cart.length === 0) {
+          alert('Your cart is empty!');
+          return;
+        }
+        alert('Order placed! Thank you for using SwiftDrop.');
+        localStorage.removeItem('cart');
+        renderCart();
+      }
+
+      // Initialize cart rendering on page load
+      renderCart();
+    </script>
+  </body>
+</html>
