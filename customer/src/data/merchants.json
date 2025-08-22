@@ -1,0 +1,37 @@
+[
+  {
+    "id": "m1",
+    "name": "Café Marrakech",
+    "rating": 4.7,
+    "etaMins": 20,
+    "imageUrl": "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&h=350"
+  },
+  {
+    "id": "m2",
+    "name": "Casablanca Grill",
+    "rating": 4.5,
+    "etaMins": 15,
+    "imageUrl": "https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&h=350"
+  },
+  {
+    "id": "m3",
+    "name": "Rabat Pizza",
+    "rating": 4.6,
+    "etaMins": 25,
+    "imageUrl": "https://images.pexels.com/photos/724216/pexels-photo-724216.jpeg?auto=compress&cs=tinysrgb&h=350"
+  },
+  {
+    "id": "m4",
+    "name": "Tangier Sushi",
+    "rating": 4.8,
+    "etaMins": 30,
+    "imageUrl": "https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&h=350"
+  },
+  {
+    "id": "m5",
+    "name": "Fez Delights",
+    "rating": 4.4,
+    "etaMins": 18,
+    "imageUrl": "https://images.pexels.com/photos/461211/pexels-photo-461211.jpeg?auto=compress&cs=tinysrgb&h=350"
+  }
+]
