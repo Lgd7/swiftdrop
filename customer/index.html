@@ -1,59 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>SwiftDrop - Merchants</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-  }
-  .merchant-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    margin-bottom: 16px;
-    max-width: 400px;
-  }
-  .merchant-card img {
-    width: 100%;
-    height: auto;
-    border-radius: 4px;
-  }
-  .merchant-card h2 {
-    margin-top: 8px;
-    margin-bottom: 4px;
-  }
-  .merchant-card p {
-    margin: 0;
-  }
-</style>
-</head>
-<body>
-<h1>Nearby Merchants</h1>
-<div id="merchant-list"></div>
-<script>
-// sample merchants data
-const merchants = [
-  { id: 'm1', name: 'Caf\u00e9 Marrakech', rating: 4.7, etaMins: 20, imageUrl: 'https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg?auto=compress&cs=tinysrgb&h=350' },
-  { id: 'm2', name: 'Casablanca Grill', rating: 4.5, etaMins: 15, imageUrl: 'https://images.pexels.com/photos/70497/pexels-photo-70497.jpeg?auto=compress&cs=tinysrgb&h=350' },
-  { id: 'm3', name: 'Rabat Pizza', rating: 4.6, etaMins: 25, imageUrl: 'https://images.pexels.com/photos/724216/pexels-photo-724216.jpeg?auto=compress&cs=tinysrgb&h=350' },
-  { id: 'm4', name: 'Tangier Sushi', rating: 4.8, etaMins: 30, imageUrl: 'https://images.pexels.com/photos/1092730/pexels-photo-1092730.jpeg?auto=compress&cs=tinysrgb&h=350' },
-  { id: 'm5', name: 'Fez Kebab House', rating: 4.4, etaMins: 18, imageUrl: 'https://images.pexels.com/photos/2619967/pexels-photo-2619967.jpeg?auto=compress&cs=tinysrgb&h=350' }
-];
+  <head>
+    <meta charset="UTF-8" />
+    <title>SwiftDrop - Nearby Merchants</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="header">Nearby Merchants</div>
+    <div id="merchant-grid" class="grid"></div>
 
-const list = document.getElementById('merchant-list');
-merchants.forEach(m => {
-  const card = document.createElement('div');
-  card.className = 'merchant-card';
-  card.innerHTML = `
-    <img src="${m.imageUrl}" alt="${m.name}">
-    <h2>${m.name}</h2>
-    <p>Rating: ${m.rating}</p>
-    <p>ETA: ${m.etaMins} mins</p>
-  `;
-  list.appendChild(card);
-});
-</script>
-</body>
+    <!-- Load shared data -->
+    <script src="data.js"></script>
+    <script>
+      // Render merchant cards using the merchants array defined in data.js
+      const grid = document.getElementById('merchant-grid');
+      merchants.forEach((m) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML =
+          '<img src="' + m.imageUrl + '" alt="' + m.name + '" />' +
+          '<div class="card-content">' +
+            '<h2>' + m.name + '</h2>' +
+            '<p>Rating: ' + m.rating + '</p>' +
+            '<p>ETA: ' + m.etaMins + ' mins</p>' +
+            '<a class="button" href="merchant.html?id=' + m.id + '">View Menu</a>' +
+          '</div>';
+        grid.appendChild(card);
+      });
+    </script>
+  </body>
 </html>
